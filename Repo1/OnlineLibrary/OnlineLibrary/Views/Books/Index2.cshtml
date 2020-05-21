@@ -1,0 +1,82 @@
+﻿@model IEnumerable<OnlineLibrary.Models.Book>
+
+@{
+    ViewBag.Title = "Index2";
+}
+
+<h1 class="glyphicon glyphicon-book">Books </h1>
+
+
+<p>
+    @using (Html.BeginForm("Search", "Books", FormMethod.Get))
+    {
+        <text> <b>Search:</b></text>
+        @Html.TextBox("key") <input type="submit" value="search" class="btn btn-primary" />
+    }
+</p>
+<table class="table table-striped">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.BId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Bname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Bauthor)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Bprice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.no_of_books)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.catagry_Id)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.BId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Bname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Bauthor)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Bprice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.no_of_books)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.catagry_Id)
+            </td>
+            <td>
+                @*@Html.ActionLink("Edit", "Edit", new { id = item.BId })*@
+
+                <a class="btn btn-success" href="@Url.Action("Borrow","Books", new {id=item.BId })">Borrow</a>
+
+               
+
+
+            </td>
+        </tr>
+    }
+
+
+</table>
+
+
+
+<p>
+
+    @Html.ActionLink("Back to home", "Index", "Home", null, new { @class = "btn btn-info" })
+</p>
+

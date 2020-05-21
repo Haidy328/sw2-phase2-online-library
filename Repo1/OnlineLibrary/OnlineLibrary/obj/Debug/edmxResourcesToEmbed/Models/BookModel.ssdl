@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BookDBModel1.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Book">
+    <Key>
+      <PropertyRef Name="BId" />
+    </Key>
+    <Property Name="BId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Bname" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="Bauthor" Type="nvarchar" MaxLength="30" />
+    <Property Name="Bprice" Type="int" />
+    <Property Name="no_of_books" Type="int" />
+    <Property Name="subject_code" Type="nchar" MaxLength="10" />
+    <Property Name="category_id" Type="int" />
+  </EntityType>
+  <EntityContainer Name="BookDBModel1StoreContainer">
+    <EntitySet Name="Book" EntityType="Self.Book" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>

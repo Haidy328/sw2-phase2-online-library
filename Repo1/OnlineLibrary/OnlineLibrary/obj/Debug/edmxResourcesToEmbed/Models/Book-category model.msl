@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ProjectDBModel1StoreContainer" CdmEntityContainer="ProjectDBEntities2">
+    <EntitySetMapping Name="Books">
+      <EntityTypeMapping TypeName="ProjectDBModel1.Book">
+        <MappingFragment StoreEntitySet="Book">
+          <ScalarProperty Name="BId" ColumnName="BId" />
+          <ScalarProperty Name="Bname" ColumnName="Bname" />
+          <ScalarProperty Name="Bauthor" ColumnName="Bauthor" />
+          <ScalarProperty Name="Bprice" ColumnName="Bprice" />
+          <ScalarProperty Name="no_of_books" ColumnName="no_of_books" />
+          <ScalarProperty Name="catagry_Id" ColumnName="catagry_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="catagries">
+      <EntityTypeMapping TypeName="ProjectDBModel1.catagry">
+        <MappingFragment StoreEntitySet="catagries">
+          <ScalarProperty Name="catId" ColumnName="catId" />
+          <ScalarProperty Name="catagry_name" ColumnName="catagry_name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

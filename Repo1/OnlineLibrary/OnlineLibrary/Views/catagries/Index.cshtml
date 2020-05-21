@@ -1,0 +1,63 @@
+﻿@model IEnumerable<OnlineLibrary.Models.catagry>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+    <h1 class="glyphicon glyphicon-book">Categories </h1>
+
+<p>
+    @*@Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-info" })*@
+    <a href="@Url.Action("Create","catagries")" class="btn btn-primary">
+        <span class="glyphicon glyphicon-heart"></span>
+        New Category
+    </a>
+</p>
+<table class="table table-striped">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.catagry_name)
+        </th>
+        <th>  @Html.DisplayNameFor(model => model.catId)       </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.catagry_name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.catId)
+            </td>
+            <td>
+                @*@Html.ActionLink("Edit", "Edit", new { id = item.BId })*@
+                <a href="@Url.Action("Edit","catagries",new { id=item.catId}) " class="btn btn-success ">
+                    <span class="glyphicon glyphicon-arrow-up"></span>
+                    Edit
+                </a> |
+                <a href="@Url.Action("Details","catagries",new { id=item.catId}) " class="btn btn-toolbar ">
+                    <span class="glyphicon glyphicon-baby-formula"></span>
+                    Details
+                </a>
+                <a href="@Url.Action("Delete","catagries",new { id=item.catId}) " class="btn btn-danger ">
+                    <span class="glyphicon glyphicon-arrow-down"></span>
+                    Delete
+                </a>             
+
+                @*@ @Html.ActionLink("Edit", "Edit", new { id = item.catId }) |
+        @Html.ActionLink("Details", "Details", new { id = item.catId }) |
+        @Html.ActionLink("Delete", "Delete", new { id = item.catId })*@
+            </td>
+        </tr>
+    }
+
+</table>
+<p>
+
+    @Html.ActionLink("Back to home", "Index", "Home", null, new { @class = "btn btn-info" })
+</p> 
+<p>
+
+    @Html.ActionLink("User Editing", "Index", "Admin", null, new { @class = "btn btn-info" })
+</p>

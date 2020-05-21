@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ProjectDBModel1.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Book">
+    <Key>
+      <PropertyRef Name="BId" />
+    </Key>
+    <Property Name="BId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Bname" Type="nvarchar" MaxLength="30" />
+    <Property Name="Bauthor" Type="nvarchar" MaxLength="30" />
+    <Property Name="Bprice" Type="int" />
+    <Property Name="no_of_books" Type="int" />
+    <Property Name="catagry_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="catagries">
+    <Key>
+      <PropertyRef Name="catId" />
+    </Key>
+    <Property Name="catId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="catagry_name" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK__Book__catagry_Id__5AEE82B9">
+    <End Role="catagries" Type="Self.catagries" Multiplicity="1" />
+    <End Role="Book" Type="Self.Book" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="catagries">
+        <PropertyRef Name="catId" />
+      </Principal>
+      <Dependent Role="Book">
+        <PropertyRef Name="catagry_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ProjectDBModel1StoreContainer">
+    <EntitySet Name="Book" EntityType="Self.Book" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="catagries" EntityType="Self.catagries" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Book__catagry_Id__5AEE82B9" Association="Self.FK__Book__catagry_Id__5AEE82B9">
+      <End Role="catagries" EntitySet="catagries" />
+      <End Role="Book" EntitySet="Book" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

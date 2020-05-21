@@ -1,0 +1,140 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ProjectDBModel1.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Book">
+          <Key>
+            <PropertyRef Name="BId" />
+          </Key>
+          <Property Name="BId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Bname" Type="nvarchar" MaxLength="30" />
+          <Property Name="Bauthor" Type="nvarchar" MaxLength="30" />
+          <Property Name="Bprice" Type="int" />
+          <Property Name="no_of_books" Type="int" />
+          <Property Name="catagry_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="catagries">
+          <Key>
+            <PropertyRef Name="catId" />
+          </Key>
+          <Property Name="catId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="catagry_name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK__Book__catagry_Id__5AEE82B9">
+          <End Role="catagries" Type="Self.catagries" Multiplicity="1" />
+          <End Role="Book" Type="Self.Book" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="catagries">
+              <PropertyRef Name="catId" />
+            </Principal>
+            <Dependent Role="Book">
+              <PropertyRef Name="catagry_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ProjectDBModel1StoreContainer">
+          <EntitySet Name="Book" EntityType="Self.Book" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="catagries" EntityType="Self.catagries" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Book__catagry_Id__5AEE82B9" Association="Self.FK__Book__catagry_Id__5AEE82B9">
+            <End Role="catagries" EntitySet="catagries" />
+            <End Role="Book" EntitySet="Book" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ProjectDBModel1" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Book">
+          <Key>
+            <PropertyRef Name="BId" />
+          </Key>
+          <Property Name="BId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Bname" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Bauthor" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Bprice" Type="Int32" />
+          <Property Name="no_of_books" Type="Int32" />
+          <Property Name="catagry_Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="catagry" Relationship="Self.FK__Book__catagry_Id__5AEE82B9" FromRole="Book" ToRole="catagries" />
+        </EntityType>
+        <EntityType Name="catagry">
+          <Key>
+            <PropertyRef Name="catId" />
+          </Key>
+          <Property Name="catId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="catagry_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Books" Relationship="Self.FK__Book__catagry_Id__5AEE82B9" FromRole="catagries" ToRole="Book" />
+        </EntityType>
+        <Association Name="FK__Book__catagry_Id__5AEE82B9">
+          <End Role="catagries" Type="Self.catagry" Multiplicity="1" />
+          <End Role="Book" Type="Self.Book" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="catagries">
+              <PropertyRef Name="catId" />
+            </Principal>
+            <Dependent Role="Book">
+              <PropertyRef Name="catagry_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ProjectDBEntities2" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Books" EntityType="Self.Book" />
+          <EntitySet Name="catagries" EntityType="Self.catagry" />
+          <AssociationSet Name="FK__Book__catagry_Id__5AEE82B9" Association="Self.FK__Book__catagry_Id__5AEE82B9">
+            <End Role="catagries" EntitySet="catagries" />
+            <End Role="Book" EntitySet="Books" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ProjectDBModel1StoreContainer" CdmEntityContainer="ProjectDBEntities2">
+          <EntitySetMapping Name="Books">
+            <EntityTypeMapping TypeName="ProjectDBModel1.Book">
+              <MappingFragment StoreEntitySet="Book">
+                <ScalarProperty Name="BId" ColumnName="BId" />
+                <ScalarProperty Name="Bname" ColumnName="Bname" />
+                <ScalarProperty Name="Bauthor" ColumnName="Bauthor" />
+                <ScalarProperty Name="Bprice" ColumnName="Bprice" />
+                <ScalarProperty Name="no_of_books" ColumnName="no_of_books" />
+                <ScalarProperty Name="catagry_Id" ColumnName="catagry_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="catagries">
+            <EntityTypeMapping TypeName="ProjectDBModel1.catagry">
+              <MappingFragment StoreEntitySet="catagries">
+                <ScalarProperty Name="catId" ColumnName="catId" />
+                <ScalarProperty Name="catagry_name" ColumnName="catagry_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

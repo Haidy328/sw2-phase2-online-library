@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ProjectDBModel1" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Book">
+    <Key>
+      <PropertyRef Name="BId" />
+    </Key>
+    <Property Name="BId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Bname" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="Bauthor" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="Bprice" Type="Int32" />
+    <Property Name="no_of_books" Type="Int32" />
+    <Property Name="catagry_Id" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="catagry" Relationship="Self.FK__Book__catagry_Id__5AEE82B9" FromRole="Book" ToRole="catagries" />
+  </EntityType>
+  <EntityType Name="catagry">
+    <Key>
+      <PropertyRef Name="catId" />
+    </Key>
+    <Property Name="catId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="catagry_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Books" Relationship="Self.FK__Book__catagry_Id__5AEE82B9" FromRole="catagries" ToRole="Book" />
+  </EntityType>
+  <Association Name="FK__Book__catagry_Id__5AEE82B9">
+    <End Role="catagries" Type="Self.catagry" Multiplicity="1" />
+    <End Role="Book" Type="Self.Book" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="catagries">
+        <PropertyRef Name="catId" />
+      </Principal>
+      <Dependent Role="Book">
+        <PropertyRef Name="catagry_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ProjectDBEntities2" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Books" EntityType="Self.Book" />
+    <EntitySet Name="catagries" EntityType="Self.catagry" />
+    <AssociationSet Name="FK__Book__catagry_Id__5AEE82B9" Association="Self.FK__Book__catagry_Id__5AEE82B9">
+      <End Role="catagries" EntitySet="catagries" />
+      <End Role="Book" EntitySet="Books" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
