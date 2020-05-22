@@ -4,12 +4,9 @@
 }
 
 <h2>Search</h2>
-<p>
-    <a href="@Url.Action("Create","Books")" class="btn btn-primary" target="_blank">
-        <span class="glyphicon glyphicon-heart"></span>
-        New Book
-    </a>
-</p>
+
+    <b><span>Books</span></b>
+
 <p>
     @using (Html.BeginForm("Search", "Books", FormMethod.Get))
     {
@@ -73,7 +70,4 @@
     @Html.ActionLink("Back to home", "Index", "Home", null, new { @class = "btn btn-info" })
 </p>
 
-<p>
-    @Html.ActionLink("User Editing", "Index", "Admin", null, new { @class = "btn btn-info" })
-</p>
 
