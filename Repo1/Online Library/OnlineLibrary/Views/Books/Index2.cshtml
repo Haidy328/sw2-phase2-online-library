@@ -1,0 +1,69 @@
+﻿@model IEnumerable<OnlineLibrary.Models.Book>
+
+@{
+    ViewBag.Title = "Index2";
+}
+
+<h1 class="glyphicon glyphicon-book">Books </h1>
+
+
+<p>
+    @using (Html.BeginForm("Search", "Books", FormMethod.Get))
+    {
+        <text> <b>Search:</b></text>
+        @Html.TextBox("key") <input type="submit" value="search" class="btn btn-primary" />
+    }
+</p>
+<table class="table table-striped">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Bname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.no_of_books)
+        </th>
+        <th></th>
+        <th>Availability</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            
+            <td>
+                @Html.DisplayFor(modelItem => item.Bname)
+            </td>
+           
+          
+            <td>
+                @Html.DisplayFor(modelItem => item.no_of_books)
+            </td>
+            <td>
+              
+                <a class="btn btn-success" href="@Url.Action("Borrow","Books", new {id=item.BId })">Borrow</a>
+
+                <a class="btn btn-success" href="@Url.Action("MoreInfo","Books", new {id=item.BId })">More Info</a>
+
+
+            </td>
+            <td>
+                @if (item.no_of_books > 0)
+                {
+                    <p> Available</p>
+                }
+                else
+                { <p style="color:#d00000"> Not Available Now, you can read it online </p>}
+            </td>
+        </tr>
+    }
+
+
+</table>
+
+
+
+<p>
+
+    @Html.ActionLink("Back to home", "Index", "Home", null, new { @class = "btn btn-info" })
+</p>
+
