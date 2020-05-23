@@ -11,8 +11,6 @@ namespace OnlineLibrary.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
-    using System.ComponentModel.DataAnnotations;
     
     public partial class catagry
     {
@@ -23,9 +21,6 @@ namespace OnlineLibrary.Models
         }
     
         public int catId { get; set; }
-
-        [Required(ErrorMessage ="Please this field is required")]
-        [DisplayName("Category name")]
         public string catagry_name { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

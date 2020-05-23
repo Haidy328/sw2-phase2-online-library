@@ -6,6 +6,12 @@
     <edmx:Diagrams>
       <Diagram DiagramId="3ef622d8df7f44ef82064c9b00a4c817" Name="Diagram1">
         <EntityTypeShape EntityType="ProjectDBModel.UsersTable" Width="2.125" PointX="0.875" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProjectDBModel.Book" Width="1.5" PointX="6.625" PointY="1" />
+        <EntityTypeShape EntityType="ProjectDBModel.catagry" Width="1.5" PointX="4.375" PointY="1.5" />
+        <EntityTypeShape EntityType="ProjectDBModel.Feedback" Width="1.5" PointX="8.875" PointY="1.25" />
+        <AssociationConnector Association="ProjectDBModel.FK__Book__catagry_Id__5AEE82B9" />
+        <AssociationConnector Association="ProjectDBModel.FK__Feedback__Book_I__6FE99F9F" />
+        <AssociationConnector Association="ProjectDBModel.FK__Feedback__User_I__70DDC3D8" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
