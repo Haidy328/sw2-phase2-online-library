@@ -26,5 +26,8 @@ namespace OnlineLibrary.Models
         }
     
         public virtual DbSet<UsersTable> UsersTables { get; set; }
+        public virtual DbSet<Book> Books { get; set; }
+        public virtual DbSet<catagry> catagries { get; set; }
+        public virtual DbSet<Feedback> Feedbacks { get; set; }
     }
 }

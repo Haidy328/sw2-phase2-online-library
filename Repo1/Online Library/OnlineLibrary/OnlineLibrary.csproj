@@ -138,10 +138,10 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Book.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>DBModels.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\catagry.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>DBModels.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CustomizeBook.cs" />
     <Compile Include="Models\DBModels.Context.cs">
@@ -158,6 +158,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>DBModels.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Feedback.cs">
+      <DependentUpon>DBModels.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Model1.Context.cs">
       <AutoGen>True</AutoGen>

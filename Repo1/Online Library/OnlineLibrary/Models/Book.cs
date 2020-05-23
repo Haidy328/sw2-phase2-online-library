@@ -11,26 +11,25 @@ namespace OnlineLibrary.Models
 {
     using System;
     using System.Collections.Generic;
-	using System.ComponentModel.DataAnnotations;
-
-	public partial class Book
+    
+    public partial class Book
     {
-		[Required(ErrorMessage = "Please Book_ID is required")]
-		public int BId { get; set; }
-		[Required(ErrorMessage = "Please Book_Name is required")]
-		public string Bname { get; set; }
-		[Required(ErrorMessage = "Please Book_Author is required")]
-		public string Bauthor { get; set; }
-		[Required(ErrorMessage = "Please Book_Price is required")]
-		[DisplayFormat(DataFormatString ="{0:C}",ApplyFormatInEditMode =false)]
-		public Nullable<int> Bprice { get; set; }
-		[Required(ErrorMessage = "Please Number_of_Books is required")]
-		public Nullable<int> no_of_books { get; set; }
-		[Required(ErrorMessage = "Please Category_ID is required")]
-		public int catagry_Id { get; set; }
-		[Required(ErrorMessage = "Please Book_URL is required")]
-		[DataType(DataType.Url)]
-		public string BUrl { get; set; }
-		public virtual catagry catagry { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Book()
+        {
+            this.Feedbacks = new HashSet<Feedback>();
+        }
+    
+        public int BId { get; set; }
+        public string Bname { get; set; }
+        public string Bauthor { get; set; }
+        public Nullable<int> Bprice { get; set; }
+        public Nullable<int> no_of_books { get; set; }
+        public int catagry_Id { get; set; }
+        public string BUrl { get; set; }
+    
+        public virtual catagry catagry { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Feedback> Feedbacks { get; set; }
     }
 }

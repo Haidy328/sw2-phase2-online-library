@@ -4,7 +4,35 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="ProjectDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="ProjectDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Book">
+          <Key>
+            <PropertyRef Name="BId" />
+          </Key>
+          <Property Name="BId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Bname" Type="nvarchar" MaxLength="30" />
+          <Property Name="Bauthor" Type="nvarchar" MaxLength="30" />
+          <Property Name="Bprice" Type="int" />
+          <Property Name="no_of_books" Type="int" />
+          <Property Name="catagry_Id" Type="int" Nullable="false" />
+          <Property Name="BUrl" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="catagries">
+          <Key>
+            <PropertyRef Name="catId" />
+          </Key>
+          <Property Name="catId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="catagry_name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Feedback">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="description" Type="nchar" MaxLength="50" />
+          <Property Name="Book_ID" Type="int" />
+          <Property Name="User_ID" Type="int" />
+        </EntityType>
         <EntityType Name="UsersTable">
           <Key>
             <PropertyRef Name="Id" />
@@ -14,13 +42,63 @@
           <Property Name="Password" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="PhoneNo" Type="varchar" MaxLength="14" Nullable="false" />
-          <Property Name="Age" Type="int" Nullable="false" StoreGeneratedPattern="None" />
+          <Property Name="Age" Type="int" Nullable="false" />
         </EntityType>
+        <Association Name="FK__Book__catagry_Id__5AEE82B9">
+          <End Role="catagries" Type="Self.catagries" Multiplicity="1" />
+          <End Role="Book" Type="Self.Book" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="catagries">
+              <PropertyRef Name="catId" />
+            </Principal>
+            <Dependent Role="Book">
+              <PropertyRef Name="catagry_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Feedback__Book_I__6FE99F9F">
+          <End Role="Book" Type="Self.Book" Multiplicity="0..1" />
+          <End Role="Feedback" Type="Self.Feedback" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Book">
+              <PropertyRef Name="BId" />
+            </Principal>
+            <Dependent Role="Feedback">
+              <PropertyRef Name="Book_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Feedback__User_I__70DDC3D8">
+          <End Role="UsersTable" Type="Self.UsersTable" Multiplicity="0..1" />
+          <End Role="Feedback" Type="Self.Feedback" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UsersTable">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Feedback">
+              <PropertyRef Name="User_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="ProjectDBModelStoreContainer">
+          <EntitySet Name="Book" EntityType="Self.Book" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="catagries" EntityType="Self.catagries" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Feedback" EntityType="Self.Feedback" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UsersTable" EntityType="Self.UsersTable" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Book__catagry_Id__5AEE82B9" Association="Self.FK__Book__catagry_Id__5AEE82B9">
+            <End Role="catagries" EntitySet="catagries" />
+            <End Role="Book" EntitySet="Book" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Feedback__Book_I__6FE99F9F" Association="Self.FK__Feedback__Book_I__6FE99F9F">
+            <End Role="Book" EntitySet="Book" />
+            <End Role="Feedback" EntitySet="Feedback" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Feedback__User_I__70DDC3D8" Association="Self.FK__Feedback__User_I__70DDC3D8">
+            <End Role="UsersTable" EntitySet="UsersTable" />
+            <End Role="Feedback" EntitySet="Feedback" />
+          </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ProjectDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -34,10 +112,95 @@
           <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="PhoneNo" Type="String" MaxLength="14" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Age" Nullable="false" Type="Int32" />
+          <NavigationProperty Name="Feedbacks" Relationship="ProjectDBModel.FK__Feedback__User_I__70DDC3D8" FromRole="UsersTable" ToRole="Feedback" />
         </EntityType>
         <EntityContainer Name="ModelDBEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="UsersTables" EntityType="Self.UsersTable" />
+          <EntitySet Name="Books" EntityType="ProjectDBModel.Book" />
+          <EntitySet Name="catagries" EntityType="ProjectDBModel.catagry" />
+          <EntitySet Name="Feedbacks" EntityType="ProjectDBModel.Feedback" />
+          <AssociationSet Name="FK__Book__catagry_Id__5AEE82B9" Association="ProjectDBModel.FK__Book__catagry_Id__5AEE82B9">
+            <End Role="catagry" EntitySet="catagries" />
+            <End Role="Book" EntitySet="Books" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Feedback__Book_I__6FE99F9F" Association="ProjectDBModel.FK__Feedback__Book_I__6FE99F9F">
+            <End Role="Book" EntitySet="Books" />
+            <End Role="Feedback" EntitySet="Feedbacks" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Feedback__User_I__70DDC3D8" Association="ProjectDBModel.FK__Feedback__User_I__70DDC3D8">
+            <End Role="UsersTable" EntitySet="UsersTables" />
+            <End Role="Feedback" EntitySet="Feedbacks" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Book">
+          <Key>
+            <PropertyRef Name="BId" />
+          </Key>
+          <Property Name="BId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Bname" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Bauthor" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Bprice" Type="Int32" />
+          <Property Name="no_of_books" Type="Int32" />
+          <Property Name="catagry_Id" Type="Int32" Nullable="false" />
+          <Property Name="BUrl" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="catagry" Relationship="ProjectDBModel.FK__Book__catagry_Id__5AEE82B9" FromRole="Book" ToRole="catagry" />
+          <NavigationProperty Name="Feedbacks" Relationship="ProjectDBModel.FK__Feedback__Book_I__6FE99F9F" FromRole="Book" ToRole="Feedback" />
+        </EntityType>
+        <EntityType Name="catagry">
+          <Key>
+            <PropertyRef Name="catId" />
+          </Key>
+          <Property Name="catId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="catagry_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Books" Relationship="ProjectDBModel.FK__Book__catagry_Id__5AEE82B9" FromRole="catagry" ToRole="Book" />
+        </EntityType>
+        <EntityType Name="Feedback">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="description" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="Book_ID" Type="Int32" />
+          <Property Name="User_ID" Type="Int32" />
+          <NavigationProperty Name="Book" Relationship="ProjectDBModel.FK__Feedback__Book_I__6FE99F9F" FromRole="Feedback" ToRole="Book" />
+          <NavigationProperty Name="UsersTable" Relationship="ProjectDBModel.FK__Feedback__User_I__70DDC3D8" FromRole="Feedback" ToRole="UsersTable" />
+        </EntityType>
+        <Association Name="FK__Book__catagry_Id__5AEE82B9">
+          <End Type="ProjectDBModel.catagry" Role="catagry" Multiplicity="1" />
+          <End Type="ProjectDBModel.Book" Role="Book" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="catagry">
+              <PropertyRef Name="catId" />
+            </Principal>
+            <Dependent Role="Book">
+              <PropertyRef Name="catagry_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Feedback__Book_I__6FE99F9F">
+          <End Type="ProjectDBModel.Book" Role="Book" Multiplicity="0..1" />
+          <End Type="ProjectDBModel.Feedback" Role="Feedback" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Book">
+              <PropertyRef Name="BId" />
+            </Principal>
+            <Dependent Role="Feedback">
+              <PropertyRef Name="Book_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Feedback__User_I__70DDC3D8">
+          <End Type="ProjectDBModel.UsersTable" Role="UsersTable" Multiplicity="0..1" />
+          <End Type="ProjectDBModel.Feedback" Role="Feedback" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UsersTable">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Feedback">
+              <PropertyRef Name="User_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -53,6 +216,37 @@
                 <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="PhoneNo" ColumnName="PhoneNo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Books">
+            <EntityTypeMapping TypeName="ProjectDBModel.Book">
+              <MappingFragment StoreEntitySet="Book">
+                <ScalarProperty Name="BUrl" ColumnName="BUrl" />
+                <ScalarProperty Name="catagry_Id" ColumnName="catagry_Id" />
+                <ScalarProperty Name="no_of_books" ColumnName="no_of_books" />
+                <ScalarProperty Name="Bprice" ColumnName="Bprice" />
+                <ScalarProperty Name="Bauthor" ColumnName="Bauthor" />
+                <ScalarProperty Name="Bname" ColumnName="Bname" />
+                <ScalarProperty Name="BId" ColumnName="BId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="catagries">
+            <EntityTypeMapping TypeName="ProjectDBModel.catagry">
+              <MappingFragment StoreEntitySet="catagries">
+                <ScalarProperty Name="catagry_name" ColumnName="catagry_name" />
+                <ScalarProperty Name="catId" ColumnName="catId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Feedbacks">
+            <EntityTypeMapping TypeName="ProjectDBModel.Feedback">
+              <MappingFragment StoreEntitySet="Feedback">
+                <ScalarProperty Name="User_ID" ColumnName="User_ID" />
+                <ScalarProperty Name="Book_ID" ColumnName="Book_ID" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
