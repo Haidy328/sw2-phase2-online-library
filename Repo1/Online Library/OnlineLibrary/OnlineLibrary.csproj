@@ -276,6 +276,7 @@
     <Content Include="Views\Books\Index2.cshtml" />
     <Content Include="Views\Books\Search_ByAdmin.cshtml" />
     <Content Include="Views\Books\MoreInfo.cshtml" />
+    <Content Include="Views\Books\Filter.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

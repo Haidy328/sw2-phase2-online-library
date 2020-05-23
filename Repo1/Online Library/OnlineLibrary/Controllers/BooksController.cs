@@ -129,6 +129,18 @@ namespace OnlineLibrary.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+        public ActionResult Filter(string key)
+        {
+            ProjectDBEntities2 online = new ProjectDBEntities2();
+            var categorylist = online.catagries.ToList();
+            SelectList list = new SelectList(categorylist, "catId", "catagry_name");
+            ViewBag.CategoryList = list;
+            var CategoryID = (from p in db.catagries
+                              where p.catagry_name == key
+                              select p.catId).FirstOrDefault();
+            var listOfBooks = db.Books.Where(x => x.catagry_Id == CategoryID).ToList();
+            return View(listOfBooks);
+        }
         public ActionResult Search(string key)
         { if (string.IsNullOrEmpty(key)) { return RedirectToAction("Index2"); }
 			else
