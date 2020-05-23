@@ -1,0 +1,89 @@
+﻿@model IEnumerable<OnlineLibrary.Models.Book>
+
+@{
+    ViewBag.Title = "Search_ByAdmin";
+}
+
+<h2>Search_ByAdmin</h2>
+
+<p>
+    <a href="@Url.Action("Create","Books")" class="btn btn-primary" target="_blank">
+        <span class="glyphicon glyphicon-heart"></span>
+        New Book
+    </a>
+</p>
+<p>
+    @using (Html.BeginForm("Search_ByAdmin", "Books", FormMethod.Get))
+    {
+        <b>Search:</b>
+        @Html.TextBox("key")
+        <input type="submit" value="search" class="btn btn-primary" />
+    }
+</p>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Bname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Bauthor)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Bprice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.no_of_books)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.catagry.catagry_name)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Bname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Bauthor)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Bprice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.no_of_books)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.catagry.catagry_name)
+            </td>
+            <td>
+
+
+                <a href="@Url.Action("Edit","Admin",new { id=item.BId}) " class="btn btn-success ">
+                    <span class="glyphicon glyphicon-arrow-up"></span>
+                    Edit
+                </a>
+
+
+                <a href="@Url.Action("Details","Admin",new { id=item.BId}) " class="btn btn-toolbar ">
+                    <span class="glyphicon glyphicon-baby-formula"></span>
+                    Details
+                </a>
+
+
+
+                <a href="@Url.Action("Delete","Admin",new { id=item.BId}) " class="btn btn-danger ">
+                    <span class="glyphicon glyphicon-arrow-down"></span>
+                    Delete
+                </a>
+            </td>
+        </tr>
+    }
+
+</table>

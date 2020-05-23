@@ -1,0 +1,83 @@
+﻿@model IEnumerable<OnlineLibrary.Models.Book>
+@{
+    ViewBag.Title = "Search for Book";
+}
+
+<h2>Search</h2>
+
+<p>
+    @using (Html.BeginForm("Search", "Books", FormMethod.Get))
+    {
+       <b>Search:</b>
+        @Html.TextBox("key") 
+        <input type="submit" value="search" class="btn btn-primary"  />
+    }
+</p>
+<table class="table table-striped">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.BId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Bname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Bauthor)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Bprice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.no_of_books)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.catagry.catagry_name)
+        </th>
+        <th></th>
+        <th>Availability</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.BId)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Bname)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Bauthor)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Bprice)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.no_of_books)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.catagry.catagry_name)
+    </td>
+    <td>
+
+        <a class="btn btn-success" href="@Url.Action("Borrow","Books", new {id=item.BId })">Borrow</a>
+
+        <a class="btn btn-success" href="@Url.Action("MoreInfo","Books", new {id=item.BId })">More Info</a>
+    </td>
+    <td>
+        @if (item.no_of_books > 0)
+        {
+            <p> Available</p>
+        }
+        else
+        { <p style="color:#d00000"> Not Available Now, you can read it online </p>}
+    </td>
+</tr>
+    }
+</table>
+<p>
+    @Html.ActionLink("Back to home", "index2", "Books", null, new { @class = "btn btn-info" })
+</p>
+
+
+

@@ -1,0 +1,78 @@
+﻿@model IEnumerable<OnlineLibrary.Models.UsersTable>
+
+@{
+    ViewBag.Title = "SearchUser";
+}
+
+<h2>SearchUser</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+<p>
+    @using (Html.BeginForm("SearchUser", "Admin", FormMethod.Get))
+    {
+        <b>Search:</b>
+        @Html.TextBox("key")
+        <input type="submit" value="search" class="btn btn-primary" />
+    }
+</p>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Username)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Password)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PhoneNo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Age)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.Username)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Password)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Email)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.PhoneNo)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Age)
+    </td>
+    <td>
+        <a href="@Url.Action("Edit","Books",new { id=item.Id}) " class="btn btn-success ">
+            <span class="glyphicon glyphicon-arrow-up"></span>
+            Edit
+        </a> |
+        <a href="@Url.Action("Details","Books",new { id=item.Id}) " class="btn btn-toolbar ">
+            <span class="glyphicon glyphicon-baby-formula"></span>
+            Details
+        </a>
+        <a href="@Url.Action("Delete","Books",new { id=item.Id}) " class="btn btn-danger ">
+            <span class="glyphicon glyphicon-arrow-down"></span>
+            Delete
+        </a>
+    </td>
+</tr>
+    }
+
+</table>

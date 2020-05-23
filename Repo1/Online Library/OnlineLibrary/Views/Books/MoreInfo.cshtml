@@ -1,0 +1,62 @@
+﻿@model OnlineLibrary.Models.Book
+
+@{
+    ViewBag.Title = "MoreInfo";
+}
+
+    <h1 class="glyphicon glyphicon-book">BookInformation </h1>
+<div>
+    <table class="table table-striped">
+        <tr>
+            <th>
+
+                @Html.DisplayNameFor(model => model.BId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Bname)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Bprice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.catagry.catagry_name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Bauthor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.no_of_books)
+            </th>
+        </tr>
+
+        <tr>
+            <td>
+
+                @Html.DisplayFor(model => model.BId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => modelItem.Bname)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => modelItem.Bprice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => modelItem.catagry.catagry_name)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.Bauthor)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.no_of_books)
+            </td>
+        </tr>
+    </table>
+</div>
+<p>  <a href="@Model.BUrl" class="btn btn-primary" role="button">Read Online</a> </p>
+<p>
+    @Html.ActionLink("Back to List", "Index2", null, new { @class = "btn btn-primary" })
+</p>
+
+
