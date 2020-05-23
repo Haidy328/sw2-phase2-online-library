@@ -1,0 +1,82 @@
+﻿@model IEnumerable<OnlineLibrary.Models.Book>
+@{
+    ViewBag.Title = "Filter for Book";
+}
+
+<h2 class="glyphicon glyphicon-book">Filter</h2>
+<p>
+    <b><span>Books</span></b>
+    <h3 style="color:red">Hint  :</h3>To know the categories click at dropdown list , then write your choise to filter
+</p>
+@Html.DropDownList("CategoryList", ViewBag.CategoryList as SelectList, "categories list")
+<p>
+    @using (Html.BeginForm("filter", "Books", FormMethod.Get))
+    {
+        <b>Filter:</b>
+        @Html.TextBox("key")
+        <input type="submit" value="Filter" class="btn btn-primary" />
+    }
+</p>
+<table class="table table-striped">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.BId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Bname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Bauthor)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Bprice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.no_of_books)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.catagry.catagry_name)
+        </th>
+        <th></th>
+        <th>Availability</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.BId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Bname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Bauthor)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Bprice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.no_of_books)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.catagry.catagry_name)
+            </td>
+
+            <td>
+                @if (item.no_of_books > 0)
+                {
+                    <p> Available</p>
+                }
+                else
+                { <p style="color:#d00000"> Not Available Now, you can read it online </p>}
+            </td>
+        </tr>
+    }
+</table>
+<p>
+    @Html.ActionLink("Back to home", "index2", null, new { @class = "btn btn-info" })
+</p>
+
+
+

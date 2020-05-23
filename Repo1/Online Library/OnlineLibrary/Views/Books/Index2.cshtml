@@ -39,10 +39,11 @@
                 @Html.DisplayFor(modelItem => item.no_of_books)
             </td>
             <td>
-              
+
                 <a class="btn btn-success" href="@Url.Action("Borrow","Books", new {id=item.BId })">Borrow</a>
 
                 <a class="btn btn-success" href="@Url.Action("MoreInfo","Books", new {id=item.BId })">More Info</a>
+                <a class="btn btn-success" href="@Url.Action("Filter","Books", new {id=item.BId })">Filter</a>
 
 
             </td>
