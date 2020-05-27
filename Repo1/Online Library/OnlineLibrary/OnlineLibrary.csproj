@@ -131,6 +131,7 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\BooksController.cs" />
     <Compile Include="Controllers\catagriesController.cs" />
+    <Compile Include="Controllers\FeedbacksController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\UserRegistController.cs" />
@@ -280,6 +281,12 @@
     <Content Include="Views\Books\Search_ByAdmin.cshtml" />
     <Content Include="Views\Books\MoreInfo.cshtml" />
     <Content Include="Views\Books\Filter.cshtml" />
+    <Content Include="Views\Feedbacks\Create.cshtml" />
+    <Content Include="Views\Feedbacks\Delete.cshtml" />
+    <Content Include="Views\Feedbacks\Details.cshtml" />
+    <Content Include="Views\Feedbacks\Edit.cshtml" />
+    <Content Include="Views\Feedbacks\Index.cshtml" />
+    <Content Include="Views\Admin\listfeedback.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

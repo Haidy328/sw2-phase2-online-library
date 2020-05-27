@@ -1,0 +1,43 @@
+﻿@model IEnumerable<OnlineLibrary.Models.Feedback>
+
+@{
+    ViewBag.Title = "listfeedback";
+}
+
+<h2>feedbacks</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Book.Bname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UsersTable.Username)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Book.Bname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UsersTable.Username)
+        </td>
+        
+    </tr>
+}
+
+</table>
+<p>
+
+    @Html.ActionLink("Back ", "Index", null, new { @class = "btn btn-info" })
+</p>

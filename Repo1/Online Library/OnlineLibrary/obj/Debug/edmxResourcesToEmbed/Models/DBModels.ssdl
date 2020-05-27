@@ -1,5 +1,33 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="ProjectDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Book">
+    <Key>
+      <PropertyRef Name="BId" />
+    </Key>
+    <Property Name="BId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Bname" Type="nvarchar" MaxLength="30" />
+    <Property Name="Bauthor" Type="nvarchar" MaxLength="30" />
+    <Property Name="Bprice" Type="int" />
+    <Property Name="no_of_books" Type="int" />
+    <Property Name="catagry_Id" Type="int" Nullable="false" />
+    <Property Name="BUrl" Type="nvarchar" MaxLength="250" />
+  </EntityType>
+  <EntityType Name="catagries">
+    <Key>
+      <PropertyRef Name="catId" />
+    </Key>
+    <Property Name="catId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="catagry_name" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Feedback">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="description" Type="nchar" MaxLength="50" />
+    <Property Name="Book_ID" Type="int" />
+    <Property Name="User_ID" Type="int" />
+  </EntityType>
   <EntityType Name="UsersTable">
     <Key>
       <PropertyRef Name="Id" />
@@ -9,9 +37,60 @@
     <Property Name="Password" Type="varchar" MaxLength="10" Nullable="false" />
     <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="PhoneNo" Type="varchar" MaxLength="14" Nullable="false" />
-    <Property Name="Age" Type="int" Nullable="false" StoreGeneratedPattern="None" />
+    <Property Name="Age" Type="int" Nullable="false" />
   </EntityType>
+  <Association Name="FK__Book__catagry_Id__5AEE82B9">
+    <End Role="catagries" Type="Self.catagries" Multiplicity="1" />
+    <End Role="Book" Type="Self.Book" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="catagries">
+        <PropertyRef Name="catId" />
+      </Principal>
+      <Dependent Role="Book">
+        <PropertyRef Name="catagry_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Feedback__Book_I__6FE99F9F">
+    <End Role="Book" Type="Self.Book" Multiplicity="0..1" />
+    <End Role="Feedback" Type="Self.Feedback" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Book">
+        <PropertyRef Name="BId" />
+      </Principal>
+      <Dependent Role="Feedback">
+        <PropertyRef Name="Book_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Feedback__User_I__70DDC3D8">
+    <End Role="UsersTable" Type="Self.UsersTable" Multiplicity="0..1" />
+    <End Role="Feedback" Type="Self.Feedback" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UsersTable">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Feedback">
+        <PropertyRef Name="User_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <EntityContainer Name="ProjectDBModelStoreContainer">
+    <EntitySet Name="Book" EntityType="Self.Book" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="catagries" EntityType="Self.catagries" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Feedback" EntityType="Self.Feedback" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UsersTable" EntityType="Self.UsersTable" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Book__catagry_Id__5AEE82B9" Association="Self.FK__Book__catagry_Id__5AEE82B9">
+      <End Role="catagries" EntitySet="catagries" />
+      <End Role="Book" EntitySet="Book" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Feedback__Book_I__6FE99F9F" Association="Self.FK__Feedback__Book_I__6FE99F9F">
+      <End Role="Book" EntitySet="Book" />
+      <End Role="Feedback" EntitySet="Feedback" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Feedback__User_I__70DDC3D8" Association="Self.FK__Feedback__User_I__70DDC3D8">
+      <End Role="UsersTable" EntitySet="UsersTable" />
+      <End Role="Feedback" EntitySet="Feedback" />
+    </AssociationSet>
   </EntityContainer>
 </Schema>

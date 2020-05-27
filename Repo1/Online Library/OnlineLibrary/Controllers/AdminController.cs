@@ -156,6 +156,13 @@ namespace OnlineLibrary.Controllers
         }
 
 
+       public ActionResult listfeedback()
+        {
+            var f = db.Feedbacks.ToList();
+            return View(f);
+        }
+
+
     }
 }
 

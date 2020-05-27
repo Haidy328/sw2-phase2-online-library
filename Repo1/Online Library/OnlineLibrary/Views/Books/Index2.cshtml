@@ -40,20 +40,22 @@
             </td>
             <td>
 
-                <a class="btn btn-success" href="@Url.Action("Borrow","Books", new {id=item.BId })">Borrow</a>
+                <a class="btn btn-success" href="@Url.Action("Borrow", "Books", new { id = item.BId })">Borrow</a>
 
-                <a class="btn btn-success" href="@Url.Action("MoreInfo","Books", new {id=item.BId })">More Info</a>
-                <a class="btn btn-success" href="@Url.Action("Filter","Books", new {id=item.BId })">Filter</a>
+                <a class="btn btn-success" href="@Url.Action("MoreInfo", "Books", new { id = item.BId })">More Info</a>
+                <a class="btn btn-success" href="@Url.Action("Filter", "Books", new { id = item.BId })">Filter</a>
+                <a class="btn btn-success" href="@Url.Action("Index", "feedbacks")">Feedback</a>
+
 
 
             </td>
             <td>
                 @if (item.no_of_books > 0)
                 {
-                    <p> Available</p>
+                    <p> Available to borrow</p>
                 }
                 else
-                { <p style="color:#d00000"> Not Available Now, you can read it online </p>}
+                { <p style="color:#d00000"> Not Available Now to borrow, you can read it online </p>}
             </td>
         </tr>
     }
