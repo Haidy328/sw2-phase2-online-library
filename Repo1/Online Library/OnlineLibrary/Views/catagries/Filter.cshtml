@@ -10,7 +10,7 @@
 </p>
 @Html.DropDownList("CategoryList", ViewBag.CategoryList as SelectList, "categories list")
 <p>
-    @using (Html.BeginForm("filter", "Books", FormMethod.Get))
+    @using (Html.BeginForm("Filter", "catagries", FormMethod.Get))
     {
         <b>Filter:</b>
         @Html.TextBox("key")
@@ -75,7 +75,7 @@
     }
 </table>
 <p>
-    @Html.ActionLink("Back to home", "index2", null, new { @class = "btn btn-info" })
+    @Html.ActionLink("Back to Index", "Index", null, new { @class = "btn btn-info" })
 </p>
 
 
