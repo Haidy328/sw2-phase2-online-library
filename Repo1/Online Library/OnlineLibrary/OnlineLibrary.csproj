@@ -280,13 +280,13 @@
     <Content Include="Views\Books\Index2.cshtml" />
     <Content Include="Views\Books\Search_ByAdmin.cshtml" />
     <Content Include="Views\Books\MoreInfo.cshtml" />
-    <Content Include="Views\Books\Filter.cshtml" />
     <Content Include="Views\Feedbacks\Create.cshtml" />
     <Content Include="Views\Feedbacks\Delete.cshtml" />
     <Content Include="Views\Feedbacks\Details.cshtml" />
     <Content Include="Views\Feedbacks\Edit.cshtml" />
     <Content Include="Views\Feedbacks\Index.cshtml" />
     <Content Include="Views\Admin\listfeedback.cshtml" />
+    <Content Include="Views\catagries\Filter.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

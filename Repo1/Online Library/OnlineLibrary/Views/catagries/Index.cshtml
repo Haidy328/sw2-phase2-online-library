@@ -6,13 +6,17 @@
 
     <h1 class="glyphicon glyphicon-book">Categories </h1>
 
-<p>
-    @*@Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-info" })*@
-    <a href="@Url.Action("Create","catagries")" class="btn btn-primary">
-        <span class="glyphicon glyphicon-heart"></span>
-        New Category
-    </a>
-</p>
+    <p>
+        @*@Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-info" })*@
+        <a href="@Url.Action("Create","catagries")" class="btn btn-primary">
+            <span class="glyphicon glyphicon-heart"></span>
+            New Category
+        </a>
+        <a href="@Url.Action("Filter","catagries")" class="btn btn-primary">
+            <span class="glyphicon glyphicon-heart"></span>
+            Filteration
+        </a>
+    </p>
 <table class="table table-striped">
     <tr>
         <th>
