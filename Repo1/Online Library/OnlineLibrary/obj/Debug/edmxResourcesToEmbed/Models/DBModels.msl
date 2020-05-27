@@ -13,5 +13,36 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Books">
+      <EntityTypeMapping TypeName="ProjectDBModel.Book">
+        <MappingFragment StoreEntitySet="Book">
+          <ScalarProperty Name="BUrl" ColumnName="BUrl" />
+          <ScalarProperty Name="catagry_Id" ColumnName="catagry_Id" />
+          <ScalarProperty Name="no_of_books" ColumnName="no_of_books" />
+          <ScalarProperty Name="Bprice" ColumnName="Bprice" />
+          <ScalarProperty Name="Bauthor" ColumnName="Bauthor" />
+          <ScalarProperty Name="Bname" ColumnName="Bname" />
+          <ScalarProperty Name="BId" ColumnName="BId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="catagries">
+      <EntityTypeMapping TypeName="ProjectDBModel.catagry">
+        <MappingFragment StoreEntitySet="catagries">
+          <ScalarProperty Name="catagry_name" ColumnName="catagry_name" />
+          <ScalarProperty Name="catId" ColumnName="catId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Feedbacks">
+      <EntityTypeMapping TypeName="ProjectDBModel.Feedback">
+        <MappingFragment StoreEntitySet="Feedback">
+          <ScalarProperty Name="User_ID" ColumnName="User_ID" />
+          <ScalarProperty Name="Book_ID" ColumnName="Book_ID" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

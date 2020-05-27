@@ -1,0 +1,42 @@
+﻿@model OnlineLibrary.Models.Feedback
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2 class="glyphicon glyphicon-eye-open">Details</h2>
+
+<div>
+    
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Book.Bname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Book.Bname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UsersTable.Username)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UsersTable.Username)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-info" }) 
+    @Html.ActionLink("Back ", "Index",null , new { @class = "btn btn-info" })
+</p>

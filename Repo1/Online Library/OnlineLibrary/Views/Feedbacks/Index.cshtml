@@ -1,0 +1,66 @@
+﻿@model IEnumerable<OnlineLibrary.Models.Feedback>
+
+@{
+    ViewBag.Title = "Feedback";
+}
+
+    <h1 class="glyphicon glyphicon-heart-empty">Feedback </h1>
+
+<p>
+    <a href="@Url.Action("create","feedbacks")" class="btn btn-info">
+       
+        Add Feedback.
+    </a>
+</p>
+
+
+
+
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Book.Bname)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UsersTable.Username)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Book.Bname)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UsersTable.Username)
+                </td>
+                <td>
+                    <a href="@Url.Action("Edit","feedbacks", new { id = item.Id })"  class="btn btn-info">
+                        
+                        Edit Feedback
+                    </a>
+                    <a href="@Url.Action("Details","feedbacks",new { id = item.Id })" class="btn btn-info">
+                        
+                        Details
+                    </a>
+                    <a href="@Url.Action("Delete","feedbacks", new { id = item.Id })" class="btn btn-info">
+                        
+                        Delete Feedback
+                    </a>
+                </td>
+            </tr>
+        }
+
+    </table>
+    <p>
+
+        @Html.ActionLink("Back to books", "Index2", "Books", null, new { @class = "btn btn-info" })
+    </p>

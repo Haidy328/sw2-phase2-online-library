@@ -10,8 +10,93 @@
     <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="PhoneNo" Type="String" MaxLength="14" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="Age" Nullable="false" Type="Int32" />
+    <NavigationProperty Name="Feedbacks" Relationship="ProjectDBModel.FK__Feedback__User_I__70DDC3D8" FromRole="UsersTable" ToRole="Feedback" />
   </EntityType>
   <EntityContainer Name="ModelDBEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="UsersTables" EntityType="Self.UsersTable" />
+    <EntitySet Name="Books" EntityType="ProjectDBModel.Book" />
+    <EntitySet Name="catagries" EntityType="ProjectDBModel.catagry" />
+    <EntitySet Name="Feedbacks" EntityType="ProjectDBModel.Feedback" />
+    <AssociationSet Name="FK__Book__catagry_Id__5AEE82B9" Association="ProjectDBModel.FK__Book__catagry_Id__5AEE82B9">
+      <End Role="catagry" EntitySet="catagries" />
+      <End Role="Book" EntitySet="Books" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Feedback__Book_I__6FE99F9F" Association="ProjectDBModel.FK__Feedback__Book_I__6FE99F9F">
+      <End Role="Book" EntitySet="Books" />
+      <End Role="Feedback" EntitySet="Feedbacks" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Feedback__User_I__70DDC3D8" Association="ProjectDBModel.FK__Feedback__User_I__70DDC3D8">
+      <End Role="UsersTable" EntitySet="UsersTables" />
+      <End Role="Feedback" EntitySet="Feedbacks" />
+    </AssociationSet>
   </EntityContainer>
+  <EntityType Name="Book">
+    <Key>
+      <PropertyRef Name="BId" />
+    </Key>
+    <Property Name="BId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Bname" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="Bauthor" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="Bprice" Type="Int32" />
+    <Property Name="no_of_books" Type="Int32" />
+    <Property Name="catagry_Id" Type="Int32" Nullable="false" />
+    <Property Name="BUrl" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="catagry" Relationship="ProjectDBModel.FK__Book__catagry_Id__5AEE82B9" FromRole="Book" ToRole="catagry" />
+    <NavigationProperty Name="Feedbacks" Relationship="ProjectDBModel.FK__Feedback__Book_I__6FE99F9F" FromRole="Book" ToRole="Feedback" />
+  </EntityType>
+  <EntityType Name="catagry">
+    <Key>
+      <PropertyRef Name="catId" />
+    </Key>
+    <Property Name="catId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="catagry_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Books" Relationship="ProjectDBModel.FK__Book__catagry_Id__5AEE82B9" FromRole="catagry" ToRole="Book" />
+  </EntityType>
+  <EntityType Name="Feedback">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="description" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+    <Property Name="Book_ID" Type="Int32" />
+    <Property Name="User_ID" Type="Int32" />
+    <NavigationProperty Name="Book" Relationship="ProjectDBModel.FK__Feedback__Book_I__6FE99F9F" FromRole="Feedback" ToRole="Book" />
+    <NavigationProperty Name="UsersTable" Relationship="ProjectDBModel.FK__Feedback__User_I__70DDC3D8" FromRole="Feedback" ToRole="UsersTable" />
+  </EntityType>
+  <Association Name="FK__Book__catagry_Id__5AEE82B9">
+    <End Type="ProjectDBModel.catagry" Role="catagry" Multiplicity="1" />
+    <End Type="ProjectDBModel.Book" Role="Book" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="catagry">
+        <PropertyRef Name="catId" />
+      </Principal>
+      <Dependent Role="Book">
+        <PropertyRef Name="catagry_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Feedback__Book_I__6FE99F9F">
+    <End Type="ProjectDBModel.Book" Role="Book" Multiplicity="0..1" />
+    <End Type="ProjectDBModel.Feedback" Role="Feedback" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Book">
+        <PropertyRef Name="BId" />
+      </Principal>
+      <Dependent Role="Feedback">
+        <PropertyRef Name="Book_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Feedback__User_I__70DDC3D8">
+    <End Type="ProjectDBModel.UsersTable" Role="UsersTable" Multiplicity="0..1" />
+    <End Type="ProjectDBModel.Feedback" Role="Feedback" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UsersTable">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Feedback">
+        <PropertyRef Name="User_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>
