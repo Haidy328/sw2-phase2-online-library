@@ -149,22 +149,16 @@ namespace OnlineLibrary.Controllers
             }
         }
         public ActionResult Filter(string key)
-
         {
-          //  if (string.IsNullOrEmpty(key)) { return RedirectToAction("Index2"); }
-         //  else
-          //  {
-                ProjectDBEntities2 online = new ProjectDBEntities2();
-                var categorylist = online.catagries.ToList();
-                SelectList list = new SelectList(categorylist, "catId", "catagry_name");
-                ViewBag.CategoryList = list;
-                var CategoryID = (from p in db.catagries
-                                  where p.catagry_name == key
-                                  select p.catId).FirstOrDefault();
-                var listOfBooks = db.Books.Where(x => x.catagry_Id == CategoryID).ToList();
-                return View(listOfBooks);
-
-          //  }
+            ProjectDBEntities2 online = new ProjectDBEntities2();
+            var categorylist = online.catagries.ToList();
+            SelectList list = new SelectList(categorylist, "catId", "catagry_name");
+            ViewBag.CategoryList = list;
+            var CategoryID = (from p in db.catagries
+                              where p.catagry_name == key
+                              select p.catId).FirstOrDefault();
+            var listOfBooks = db.Books.Where(x => x.catagry_Id == CategoryID).ToList();
+            return View(listOfBooks);
         }
         protected override void Dispose(bool disposing)
         {
