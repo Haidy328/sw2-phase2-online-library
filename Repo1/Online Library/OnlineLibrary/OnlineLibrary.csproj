@@ -286,7 +286,7 @@
     <Content Include="Views\Feedbacks\Edit.cshtml" />
     <Content Include="Views\Feedbacks\Index.cshtml" />
     <Content Include="Views\Admin\listfeedback.cshtml" />
-    <Content Include="Views\catagries\Filter.cshtml" />
+    <Content Include="Views\Books\filter.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

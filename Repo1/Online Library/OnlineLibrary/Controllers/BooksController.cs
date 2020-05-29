@@ -94,12 +94,12 @@ namespace OnlineLibrary.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include ="BId,Bname,Bauthor,Bprice,no_of_books,catagry_Id,BUrl")] Book book)
+        public ActionResult Edit([Bind(Include = "BId,Bname,Bauthor,Bprice,no_of_books,catagry_Id,BUrl")] Book book)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(book).State = EntityState.Modified;
-                db.SaveChanges(); 
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(book);
@@ -129,26 +129,37 @@ namespace OnlineLibrary.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
-     
+
         public ActionResult Search(string key)
         { if (string.IsNullOrEmpty(key)) { return RedirectToAction("Index2"); }
-			else
-			{
-				var listOfBooks = db.Books.Where(x => x.Bname == key).ToList();
-				return View(listOfBooks);
-			}
+            else
+            {
+                var listOfBooks = db.Books.Where(x => x.Bname == key).ToList();
+                return View(listOfBooks);
+            }
         }
 
         public ActionResult Search_ByAdmin(string key)
         {
-			if (string.IsNullOrEmpty(key)) { return RedirectToAction("Index"); }
-			else
-			{
-				var listOfBooks = db.Books.Where(x => x.Bname == key).ToList();
-				return View(listOfBooks);
-			}
+            if (string.IsNullOrEmpty(key)) { return RedirectToAction("Index"); }
+            else
+            {
+                var listOfBooks = db.Books.Where(x => x.Bname == key).ToList();
+                return View(listOfBooks);
+            }
         }
-
+        public ActionResult Filter(string key)
+        {
+            ProjectDBEntities2 online = new ProjectDBEntities2();
+            var categorylist = online.catagries.ToList();
+            SelectList list = new SelectList(categorylist, "catId", "catagry_name");
+            ViewBag.CategoryList = list;
+            var CategoryID = (from p in db.catagries
+                              where p.catagry_name == key
+                              select p.catId).FirstOrDefault();
+            var listOfBooks = db.Books.Where(x => x.catagry_Id == CategoryID).ToList();
+            return View(listOfBooks);
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)

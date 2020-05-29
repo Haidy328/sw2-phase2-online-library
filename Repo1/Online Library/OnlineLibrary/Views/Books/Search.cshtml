@@ -63,6 +63,7 @@
         <a class="btn btn-success" href="@Url.Action("Borrow","Books", new {id=item.BId })">Borrow</a>
 
         <a class="btn btn-success" href="@Url.Action("MoreInfo","Books", new {id=item.BId })">More Info</a>
+        <a class="btn btn-success" href="@Url.Action("Index", "feedbacks")">Feedback</a>
     </td>
     <td>
         @if (item.no_of_books > 0)
