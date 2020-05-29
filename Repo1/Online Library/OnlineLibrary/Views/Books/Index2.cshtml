@@ -8,11 +8,17 @@
 
 
 <p>
-    @using (Html.BeginForm("Search", "Books", FormMethod.Get))
+    @**@   @using (Html.BeginForm("Search", "Books", FormMethod.Get))
     {
         <text> <b>Search:</b></text>
         @Html.TextBox("key") <input type="submit" value="search" class="btn btn-primary" />
+          <a href="@Url.Action("filter","Books")" class="btn btn-primary">
+                <span class="glyphicon glyphicon-heart"></span>
+                Filter
+            </a> 
+        
     }
+
 </p>
 <table class="table table-striped">
     <tr>
@@ -29,12 +35,12 @@
     @foreach (var item in Model)
     {
         <tr>
-            
+
             <td>
                 @Html.DisplayFor(modelItem => item.Bname)
             </td>
-           
-          
+
+
             <td>
                 @Html.DisplayFor(modelItem => item.no_of_books)
             </td>
@@ -43,7 +49,7 @@
                 <a class="btn btn-success" href="@Url.Action("Borrow", "Books", new { id = item.BId })">Borrow</a>
 
                 <a class="btn btn-success" href="@Url.Action("MoreInfo", "Books", new { id = item.BId })">More Info</a>
-               
+
                 <a class="btn btn-success" href="@Url.Action("Index", "feedbacks")">Feedback</a>
 
 
