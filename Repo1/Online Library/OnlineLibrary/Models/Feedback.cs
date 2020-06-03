@@ -11,13 +11,20 @@ namespace OnlineLibrary.Models
 {
     using System;
     using System.Collections.Generic;
-    
-    public partial class Feedback
+	using System.ComponentModel.DataAnnotations;
+	using System.ComponentModel;
+
+	public partial class Feedback
     {
         public int Id { get; set; }
-        public string description { get; set; }
-        public Nullable<int> Book_ID { get; set; }
-        public Nullable<int> User_ID { get; set; }
+		[Required(ErrorMessage = "Please description is required")]
+		public string description { get; set; }
+		[Display( Name ="Book_name")]
+		[Required(ErrorMessage = "Please Book_ID is required")]
+		public Nullable<int> Book_ID { get; set; }
+		[Display( Name="User_name")]
+		[Required(ErrorMessage = "Please User_ID is required")]
+		public Nullable<int> User_ID { get; set; }
     
         public virtual Book Book { get; set; }
         public virtual UsersTable UsersTable { get; set; }

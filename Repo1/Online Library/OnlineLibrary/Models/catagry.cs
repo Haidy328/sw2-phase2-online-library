@@ -11,17 +11,21 @@ namespace OnlineLibrary.Models
 {
     using System;
     using System.Collections.Generic;
-    
-    public partial class catagry
+	using System.ComponentModel.DataAnnotations;
+	using System.ComponentModel;
+
+	public partial class catagry
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public catagry()
         {
             this.Books = new HashSet<Book>();
         }
-    
-        public int catId { get; set; }
-        public string catagry_name { get; set; }
+		[Required(ErrorMessage = "Please catId is required")]
+		public int catId { get; set; }
+		[Required(ErrorMessage = "Please catagry_name is required")]
+		[Display(Name="catagry_name")]
+		public string catagry_name { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Book> Books { get; set; }
