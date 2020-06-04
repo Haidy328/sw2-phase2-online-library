@@ -11,21 +11,27 @@ namespace OnlineLibrary.Models
 {
     using System;
     using System.Collections.Generic;
-    
-    public partial class UsersTable
+	using System.ComponentModel.DataAnnotations;
+
+	public partial class UsersTable
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public UsersTable()
         {
             this.Feedbacks = new HashSet<Feedback>();
         }
-    
-        public int Id { get; set; }
-        public string Username { get; set; }
-        public string Password { get; set; }
-        public string Email { get; set; }
-        public string PhoneNo { get; set; }
-        public int Age { get; set; }
+		[Required(ErrorMessage = "Please this field is required")]
+		public int Id { get; set; }
+		[Required(ErrorMessage = "Please this field is required")]
+		public string Username { get; set; }
+		[Required(ErrorMessage = "Please this field is required")]
+		public string Password { get; set; }
+		[Required(ErrorMessage = "Please this field is required")]
+		public string Email { get; set; }
+		[Required(ErrorMessage = "Please this field is required")]
+		public string PhoneNo { get; set; }
+		[Required(ErrorMessage = "Please this field is required")]
+		public int Age { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Feedback> Feedbacks { get; set; }
