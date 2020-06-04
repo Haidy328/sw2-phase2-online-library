@@ -25,6 +25,7 @@ namespace OnlineLibrary.Models
 		[Required(ErrorMessage = "Please this field is required")]
 		public string Username { get; set; }
 		[Required(ErrorMessage = "Please this field is required")]
+		[DataType(DataType.Password)]
 		public string Password { get; set; }
 		[Required(ErrorMessage = "Please this field is required")]
 		public string Email { get; set; }
